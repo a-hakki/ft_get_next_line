@@ -11,9 +11,12 @@
 # define BUFFER_SIZE 3
 #endif
 
-char *get_next_line(int fd);
-char *ft_realloc(char *saved);
-char	*ft_strchr(const char *str, int search_str);
+char    *get_next_line(int fd);
+char    *ft_realloc(char *saved);
+int     ft_strchr(const char *str, int search_str);
+char	*ft_strcpy(char *dest, char *src);
+char	*ft_strdup(const char *str1);
+char	*ft_strncat(char *dest, char *src, size_t nb);
 
 
 #endif

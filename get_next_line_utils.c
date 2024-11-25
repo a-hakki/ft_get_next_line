@@ -45,6 +45,22 @@ int ft_strchr(const char *str, int search_str)
 	}
 	return (i);
 }
+char	*ft_strncat(char *dest, char *src, size_t nb)
+{
+	size_t	i;
+	size_t	n;
+
+	i = ft_strlen(dest);
+	n = 0;
+	while (n < nb && src[n])
+	{
+		dest[i] = src[n];
+		i++;
+		n++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
 
 char	*ft_strcpy(char *dest, char *src)
 {
@@ -67,7 +83,6 @@ char *ft_realloc(char *saved)
     size_t size = 16;
     char *temp;
 
-    
     while (size < BUFFER_SIZE + ft_strlen(saved) + 1)
         size *= 2;
     temp = malloc(size);
