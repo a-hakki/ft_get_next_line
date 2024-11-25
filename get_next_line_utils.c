@@ -12,6 +12,17 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
+void fireforce(char *s, char *a, char *d)
+{
+	free(s);
+	free(a);
+	free(d);
+	s = NULL;
+	a = NULL;
+	d = NULL;
+
+}
+
 char	*ft_strdup(const char *str1)
 {
 	int		i;

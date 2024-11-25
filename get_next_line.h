@@ -8,7 +8,7 @@
 # include <string.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 3
+# define BUFFER_SIZE 42
 #endif
 
 char    *get_next_line(int fd);
@@ -18,7 +18,7 @@ char	*ft_strcpy(char *dest, char *src);
 char	*ft_strdup(const char *str1);
 char	*ft_strncat(char *dest, char *src, size_t nb);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-
+void    fireforce(char *s, char *a, char *d);
 
 #endif
 

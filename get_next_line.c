@@ -34,6 +34,8 @@ char *get_next_line(int fd)
             check = ft_strchr(allocated, '\n');
             temp = ft_strncat(temp, allocated, check + 1);
             saved = ft_strdup(allocated + check + 1);
+            if(!saved)
+                return (fireforce(saved, allocated, temp), NULL);
             break;
         }
         else
@@ -53,31 +55,26 @@ int main()
     int i = 0; 
     char *s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
-
+    free(s);
     s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
-
+    free(s);
     s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
-
+    free(s);
     s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
-
+    free(s);
     s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
-
+    free(s);
     s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
-
+    free(s);
     s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
-
-    s = get_next_line(fd);
-    printf("[%d] : %s", ++i,s);
-
-    s = get_next_line(fd);
-    printf("[%d] : %s\n", ++i,s);
- 
+    free(s);
+    
 }
     // char *s = malloc(BUFFER_SIZE + 1);
     // if (!s)
