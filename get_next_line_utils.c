@@ -78,23 +78,25 @@ char	*ft_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-char *ft_realloc(char *saved)
+char *ft_realloc(char *start)
 {
     size_t size = 16;
     char *temp;
 
-    while (size < BUFFER_SIZE + ft_strlen(saved) + 1)
+    while (size < BUFFER_SIZE + ft_strlen(start) + 1)
         size *= 2;
     temp = malloc(size);
     if (!temp)
     {
-        if (saved)
-            free(saved);
+        if (start)
+            free(start);
         return (NULL);
     }
-    ft_strcpy(temp, saved);
-    if (saved)
-            free(saved);
+	if (!start)
+		return (temp);
+    ft_strcpy(temp, start);
+    if (start)
+            free(start);
     return (temp);
 }
 char	*ft_substr(char const *s, unsigned int start, size_t len)
