@@ -8,7 +8,7 @@ char *get_next_line(int fd)
 {
     static char     *saved;
     char            *temp = NULL;
-    char        *allocated;
+    char        *allocated = NULL;
     int       readen_bites;
     size_t           check;
 
@@ -16,21 +16,18 @@ char *get_next_line(int fd)
     if (!allocated)
         return (NULL);
     readen_bites = 1;
-    printf("\n *****saved is :%s*******\n", saved);
-    printf("\n *****temp is :%s*******\n", temp);
     temp = ft_realloc(saved);
-    printf("\n *****temp is :%s*******\n", temp);
     while (readen_bites > 0)
     {
         temp = ft_realloc(temp);
-        printf("\n *****while temp is :%s*******\n", temp);
         readen_bites = read(fd, allocated, BUFFER_SIZE);
+        allocated[readen_bites] = '\0';
         if (readen_bites <= 0)
         {
             if (readen_bites == 0)
                 break;
             else
-                return (free(allocated), free(temp), NULL);
+                return (free(allocated), free(saved) , saved = NULL, free(temp), NULL);
         }
         if (ft_strchr(allocated, '\n') != BUFFER_SIZE)
         {
@@ -43,8 +40,10 @@ char *get_next_line(int fd)
             temp = ft_strncat(temp, allocated, BUFFER_SIZE);
     }
     free(allocated);
-    printf("\n***(*************khrj***********)***\n");
+    if (readen_bites == 0)
+        return (free(temp), free(saved), saved = NULL, NULL);
     return(temp);
+
 } 
 int main()
 {
@@ -54,19 +53,31 @@ int main()
     int i = 0; 
     char *s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
-    free(s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+
     s = get_next_line(fd);
     printf("[%d] : %s\n", ++i,s);
-    free(s);
-    s = get_next_line(fd);
-    printf("[%d] : %s\n", ++i,s);
-    free(s);
-    s = get_next_line(fd);
-    printf("[%d] : %s\n", ++i,s);
-    free(s);
-    s = get_next_line(fd);
-    printf("[%d] : %s\n", ++i,s);
-    free(s);
+ 
 }
     // char *s = malloc(BUFFER_SIZE + 1);
     // if (!s)

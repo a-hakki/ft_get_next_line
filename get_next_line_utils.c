@@ -85,7 +85,7 @@ char *ft_realloc(char *start)
 
     while (size < BUFFER_SIZE + ft_strlen(start) + 1)
         size *= 2;
-    temp = malloc(size);
+    temp = calloc(size + 1, 1);
     if (!temp)
     {
         if (start)
@@ -95,8 +95,8 @@ char *ft_realloc(char *start)
 	if (!start)
 		return (temp);
     ft_strcpy(temp, start);
-    if (start)
-            free(start);
+    // if (start)
+    //         free(start); // ! double free
     return (temp);
 }
 char	*ft_substr(char const *s, unsigned int start, size_t len)
