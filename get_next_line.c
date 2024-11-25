@@ -2,18 +2,13 @@
 #include "get_next_line.h"
 
 
-// char *slpt(char *temp, char *saved, char *allocated)
+// char *slpt(char *temp, char *saved, char *allocated, size_t check)
 // {
 //     char *returned;
 //     size_t check;
 
-//     if (ft_strchr(allocated, '\n') == BUFFER_SIZE)
-//             ft_strncat(temp, allocated, BUFFER_SIZE);
-//         else
-//         {
-//             check = ft_strchr(allocated, '\n');
-//         }
-//     returned = 
+
+//     returned = ft_substr(temp, 0, check);
 //     saved = ft_strdup(allocated + check + 1);
 
 //     return (returned);
@@ -28,7 +23,7 @@ char *get_next_line(int fd)
     char            *temp;
     char        *allocated;
     int       readen_bites;
-    size_t              check;
+    size_t           check;
 
     allocated = malloc(BUFFER_SIZE + 1);
     if (!allocated)
