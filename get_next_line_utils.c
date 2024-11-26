@@ -133,5 +133,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	returned[i] = '\0';
+	free((char *)s);
 	return (returned);
 }

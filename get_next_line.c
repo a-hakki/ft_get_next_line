@@ -16,36 +16,52 @@ char *get_next_line(int fd)
     if (!allocated)
         return (NULL);
     readen_bites = 1;
-    temp = ft_realloc(saved);
-    while (readen_bites > 0)
+    // printf("\n *****saved is :%s*******\n", saved);
+    // printf("\n *****temp is :%s*******\n", temp);
+    if (saved)
+        temp = ft_strdup(saved);
+    check = ft_strchr(temp, '\n');
+    if (check < ft_strlen(temp))
     {
-        temp = ft_realloc(temp);
-        readen_bites = read(fd, allocated, BUFFER_SIZE);
-        allocated[readen_bites] = '\0';
-        if (readen_bites <= 0)
-        {
-            if (readen_bites == 0)
-                break;
-            else
-                return (free(allocated), free(saved) , saved = NULL, free(temp), NULL);
-        }
-        if (ft_strchr(allocated, '\n') != BUFFER_SIZE)
-        {
-            check = ft_strchr(allocated, '\n');
-            temp = ft_strncat(temp, allocated, check + 1);
-            saved = ft_strdup(allocated + check + 1);
-            if(!saved)
-                return (fireforce(saved, allocated, temp), NULL);
-            break;
-        }
-        else
-            temp = ft_strncat(temp, allocated, BUFFER_SIZE);
+        saved = ft_strdup(temp + check + 1);
+        if(!saved)
+            return (fireforce(saved, allocated, temp), NULL);
+        temp = ft_substr(temp, 0, check + 1);
     }
-    free(allocated);
+    else
+    {
+        while (readen_bites > 0)
+        {
+            temp = ft_realloc(temp);
+            // printf("\n *****while temp is :%s*******\n", temp);
+            readen_bites = read(fd, allocated, BUFFER_SIZE);
+            allocated[readen_bites] = '\0';
+            if (readen_bites <= 0)
+            {
+                if (readen_bites == 0)
+                    break;
+                else
+                    return (free(allocated), free(saved) , saved = NULL, free(temp), NULL);
+            }
+            if (ft_strchr(allocated, '\n') != BUFFER_SIZE)
+            {
+                check = ft_strchr(allocated, '\n');
+                temp = ft_strncat(temp, allocated, check + 1);
+                saved = ft_strdup(allocated + check + 1);
+                if(!saved)
+                    return (fireforce(saved, allocated, temp), NULL);
+                break;
+            }
+            else
+                temp = ft_strncat(temp, allocated, BUFFER_SIZE);
+        }
+    }
+    if (allocated)
+        free(allocated);
     if (readen_bites == 0)
-        return (free(temp), free(saved), saved = NULL, NULL);
+        return (free(saved), saved = NULL, temp);
+    
     return(temp);
-
 } 
 int main()
 {
@@ -74,6 +90,18 @@ int main()
     s = get_next_line(fd);
     printf("[%d] : %s", ++i,s);
     free(s);
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+    free(s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+    free(s);
+    
+    s = get_next_line(fd);
+    printf("[%d] : %s", ++i,s);
+    free(s);
+    
     
 }
     // char *s = malloc(BUFFER_SIZE + 1);
